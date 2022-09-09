@@ -14,6 +14,7 @@ namespace Encapsulation.Models
             AccountBalance = 0;
         }
 
+
         public void DepositAmount(int amount)
         {
             AccountBalance += amount;

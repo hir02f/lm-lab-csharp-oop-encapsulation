@@ -3,61 +3,34 @@ namespace Encapsulation.Models
 {
     public class WeatherReporter
     {
-        public string Location;
-        public double Temperature;
+        private string _location;
+        private double _temperature;
+        private const double FAHRENHEITMULTIPLIER = 9 / 5;
+        private const int FAHRENHEITADD = 32;
+        private const int CONSIDEREDHOT = 30;
+        private const int CONSIDEREDCOLD = 10;
 
         public WeatherReporter(string location, double temperature)
         {
-            Location = location;
-            Temperature = temperature;
+            _location = location;
+            _temperature = temperature;
         }
 
-        public string Print()
+        public string PrintWeatherReport()
         {
-            double newTemp = (9.0 / 5.0) * Temperature + 32;
-            return $"I am in {Location} and it is {Check1()}. {Check2()}. The temperature in Fahrenheit is {newTemp}.";
+            double newTemp = FAHRENHEITMULTIPLIER * _temperature + FAHRENHEITADD;
+            return $"I am in {_location} and it is {CheckWeather()}. {CheckTemperature()}. The temperature in Fahrenheit is {newTemp}.";
         }
 
-        public string Check1()
+        public string CheckWeather()
         {
-            if (Location == "London")
-            {
-
-                return "🌦";
-
-            }
-            else if (Location == "California")
-            {
-
-                return "🌅";
-
-            }
-            else if (Location == "Cape Town")
-            {
-
-                return "🌤";
-
-            }
-            return "🔆";
+            return _location == "London" ? "🌦" : _location == "California" ? "🌅" : _location == "Cape Town" ? "🌤" : "🔆";
         }
 
-        public string Check2()
+        public string CheckTemperature()
         {
-            if (Temperature > 30)
-            {
-
-                return "It's too hot 🥵!";
-
-            }
-            else if (Temperature < 10)
-            {
-
-                return "It's too cold 🥶!";
-
-            }
-            return "Ahhh...it's just right 😊!";
-        }
-
+            return _temperature > CONSIDEREDHOT ? "It's too hot 🥵!" : _temperature < CONSIDEREDCOLD ? "It's too cold 🥶!" : "Ahhh...it's just right 😊!";
+        }        
     }
 }
 
